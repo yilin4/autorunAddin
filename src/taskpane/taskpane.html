@@ -1,0 +1,116 @@
+<!-- Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT License. -->
+<!-- This file shows how to design a first-run page that provides a welcome screen to the user about the features of the add-in. -->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Contoso Task Pane Add-in</title>
+
+    <!-- Office JavaScript API -->
+    <script type="text/javascript" src="https://appsforoffice.microsoft.com/lib/1.1/hosted/office.js"></script>
+
+    <!-- For more information on Fluent UI, visit https://developer.microsoft.com/fluentui#/. -->
+    <link rel="stylesheet" href="https://res-1.cdn.office.net/files/fabric-cdn-prod_20230815.002/office-ui-fabric-core/11.1.0/css/fabric.min.css"/>
+
+    <!-- Template styles -->
+    <link href="taskpane.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body class="ms-font-m ms-welcome ms-Fabric">
+    <header class="ms-welcome__header ms-bgColor-neutralLighter">
+        <img width="90" height="90" src="../../assets/logo-filled.png" alt="Contoso" title="Contoso" />
+        <h1 class="ms-font-su">Welcome</h1>
+    </header>
+    <section id="sideload-msg" class="ms-welcome__main">
+        <h2 class="ms-font-xl">Please <a target="_blank" href="https://learn.microsoft.com/office/dev/add-ins/testing/test-debug-office-add-ins#sideload-an-office-add-in-for-testing">sideload</a> your add-in to see app body.</h2>
+    </section>
+    <main id="app-body" class="ms-welcome__main" style="display: none;">
+        <!-- <p class="ms-font-l"><b>Change the seletion's color.</b></p>
+        <div role="button" id="changeSelectionToRed" class="ms-welcome__action ms-Button ms-Button--hero ms-font-m" style="text-align:center">
+            <span class="ms-Button-label">Change the selection to red</span>
+            <br/>
+        </div>
+        <div role="button" id="changeSelectionToBlack" class="ms-welcome__action ms-Button ms-Button--hero ms-font-m" style="text-align:center">
+            <span class="ms-Button-label">Change the selection to black</span><br/>
+        </div>
+        <hr/>
+        <hr/>
+        <p class="ms-font-l"><b>Change the selection's font.</b></p>
+        <div role="button" id="changeFontToArial" class="ms-welcome__action ms-Button ms-Button--hero ms-font-m" style="text-align:center">
+            <span class="ms-Button-label">Insert template</span>
+            <br/>
+            <span class="ms-font-nb">Insert a template as a start.</span>
+        </div>
+        <div role="button" id="clear" class="ms-welcome__action ms-Button ms-Button--hero ms-font-m" style="text-align:center">
+            <span class="ms-Button-label">Clear</span><br/>
+            <span class="ms-font-p">Clear the document.</span>
+        </div>
+        <hr/>
+        <hr/> -->
+        <p class="ms-font-l"><b>Import Styles, remove styles and apply styles.</b></p>
+        <div role="button" id="importStyles" class="ms-welcome__action ms-Button ms-Button--hero ms-font-m" style="text-align:center">
+            <span class="ms-Button-label">Import Styles</span>
+            <br/>
+            <span class="ms-font-nb">Import styles from a template.</span>
+        </div>
+        <div role="button" id="removeStyles" class="ms-welcome__action ms-Button ms-Button--hero ms-font-m" style="text-align:center">
+            <span class="ms-Button-label">Remove Styles</span><br/>
+            <span class="ms-font-p">Remove the imported styles.</span>
+        </div>
+        <div role="button" id="applyStyle" class="ms-welcome__action ms-Button ms-Button--hero ms-font-m" style="text-align:center">
+            <span class="ms-Button-label">Apply Style</span><br/>
+            <span class="ms-font-p">Apply one of the imported styles.</span>
+        </div>
+        <hr/>
+        <hr/>
+        <p class="ms-font-l"><b>Insert logos or remove one.</b></p>
+        <div role="button" id="insertLogo" class="ms-welcome__action ms-Button ms-Button--hero ms-font-m" style="text-align:center">
+            <span class="ms-Button-label">Insert logo</span>
+        </div>
+        <hr/>
+        <hr/>
+        <p class="ms-font-l"><b>Insert a template or clear.</b></p>
+        <div role="button" id="insertTemplate" class="ms-welcome__action ms-Button ms-Button--hero ms-font-m" style="text-align:center">
+            <span class="ms-Button-label">Insert template</span>
+            <br/>
+            <span class="ms-font-nb">Insert a template as a start.</span>
+        </div>
+        <div role="button" id="clearDocument" class="ms-welcome__action ms-Button ms-Button--hero ms-font-m" style="text-align:center">
+            <span class="ms-Button-label">Clear</span><br/>
+            <span class="ms-font-p">Clear the document.</span>
+        </div>
+        <hr/>
+        <hr/>
+        <p class="ms-font-l"><b>Change the document Sensitive Level by clicking corresponding Sensitivity Level.</b></p>
+        <div role="button" id="nonBusiness" class="ms-welcome__action ms-Button ms-Button--hero ms-font-m" style="text-align:center">
+            <span class="ms-Button-label" style="color:#737173">Non-Business</span>
+            <br/>
+            <span class="ms-font-nb">The data is personal and not business related.</span>
+        </div>
+        <div role="button" id="public" class="ms-welcome__action ms-Button ms-Button--hero ms-font-m" style="text-align:center">
+            <span class="ms-Button-label" style="color:#07641d">Public</span><br/>
+            <span class="ms-font-p">The data is for the public and shareable externally.</span>
+        </div>
+        <div role="button" id="general" class="ms-welcome__action ms-Button ms-Button--hero ms-font-m" style="text-align:center">
+            <span class="ms-Button-label" style="color:#0177d3">General</span><br/>
+            <span class="ms-font-g">Business data shared with trusted individuals.</span>
+        </div>
+        <div role="button" id="confidential" class="ms-welcome__action ms-Button ms-Button--hero ms-font-m" style="text-align:center">
+            <span class="ms-Button-label" style="color:#ff5c3a">Confidential</span><br/>
+            <span class="ms-font-c">Sensitive business data shared with trusted individuals.</span>
+        </div>
+        <div role="button" id="highConfidential" class="ms-welcome__action ms-Button ms-Button--hero ms-font-m" style="text-align:center">
+            <span class="ms-Button-label" style="color:#f8334d">High Confidential</span><br/>
+            <span class="ms-font-hc">The data must be secret or in some way highly critical.</span>
+        </div><div role="button" id="clearHeaders" class="ms-welcome__action ms-Button ms-Button--hero ms-font-m" style="text-align:center">
+            <span class="ms-Button-label">Clear Headers</span><br/>
+        </div>
+        <p><label id="item-subject"></label></p>
+    </main>
+</body>
+
+</html>
