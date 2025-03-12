@@ -37,7 +37,7 @@
           <FunctionFile resid="Commands.Url"/>
           <ExtensionPoint xsi:type="LaunchEvent">
             <LaunchEvents>
-              <LaunchEvent Type="OnDocumentOpened" FunctionName="autorun"/>
+              <LaunchEvent Type="OnDocumentOpen" FunctionName="autorun"/>
             </LaunchEvents>
             <SourceLocation resid="WebViewRuntime.Url"/>
           </ExtensionPoint>
