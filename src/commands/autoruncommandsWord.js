@@ -59,7 +59,7 @@ async function autorun(event) {
   });
 
   // Calling event.completed is required. event.completed lets the platform know that processing has completed.
-  event.completed();
+  event.completed({ allowEvent: true });
 }
 
 Office.actions.associate("autorun", autorun);
